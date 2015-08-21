@@ -15,17 +15,18 @@ module OmniAuth
 
       info do
         {
-          name: raw_info['certname'],
-          email: raw_info['default_email']['email_address'],
-          first_name: raw_info['firstname'],
-          last_name: raw_info['lastname'],
-          image: raw_info['profile_photo_url'],
-          display_name: raw_info['display_name']
+          :name => raw_info['certname'],
+          :email => raw_info['emails_str'],
+          :first_name => raw_info['firstname'],
+          :middle_name => raw_info['middlename'],
+          :last_name => raw_info['lastname'],
+          :image => raw_info['profile_photo_url'],
+          :display_name => raw_info['display_name']
         }
       end
 
       extra do
-        {'raw_info' => raw_info}
+        {:raw_info => raw_info}
       end
 
       # def token_params
@@ -33,7 +34,7 @@ module OmniAuth
       # end
 
       def raw_info
-        @raw_info ||= access_token.get('/api/me', :headers => {'Accept' => "application/json; version=1" }).parsed['payload']['user'] || {}
+        @raw_info ||= access_token.get('/api/me', :headers => {'Accept' => "application/json; version=1" }).parsed['payload']['users'].first || {}
       end
 
       # def build_access_token
