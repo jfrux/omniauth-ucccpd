@@ -16,7 +16,7 @@ module OmniAuth
       info do
         {
           :name => raw_info['certname'],
-          :email => raw_info['emails_str'],
+          :email => raw_info['email'],
           :first_name => raw_info['firstname'],
           :middle_name => raw_info['middlename'],
           :last_name => raw_info['lastname'],
